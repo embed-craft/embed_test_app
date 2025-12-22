@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "108457588906",
+    "project_id": "embed-craft",
+    "storage_bucket": "embed-craft.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108457588906:android:35a9c64a62170ffd7ff8d3",
+        "android_client_info": {
+          "package_name": "big.basket"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY8EuWoDdwN_sSMPX2WmEm6HYWBKp1u1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
