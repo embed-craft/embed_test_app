@@ -6,6 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/screens/login_screen.dart';
 import 'package:untitled/screens/cart_screen.dart';
 import 'package:untitled/screens/profile_screen.dart';
+import 'package:untitled/screens/recipe_detail_screen.dart';
+import 'package:untitled/screens/checkout_screen.dart';
+import 'package:untitled/screens/membership_screen.dart';
 
 // ⚠️ IMPORTANT: User must add google-services.json for this to work!
 
@@ -116,7 +119,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _openCart() {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => const CartScreen()));
+    // Navigator.push(context, MaterialPageRoute(builder: (_) => const CartScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => const CheckoutScreen())); // DIRECT TO CHECKOUT FOR DEMO
   }
 
   void _openProfile() {
@@ -312,6 +316,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                'referral_source': 'home_banner',
                                'discount_value': 'Freedel + Cashback'
                              });
+                             Navigator.push(context, MaterialPageRoute(builder: (_) => const MembershipScreen()));
                           },
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.green),
                           child: const Text('JOIN NOW'),
@@ -322,6 +327,46 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               
+          // 4.5 FEATURED RECIPE (New Section)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: EmbedWidgetWrapper(
+              id: 'home_featured_recipe_card',
+              child: GestureDetector(
+                onTap: () {
+                    AppNinja.track('featured_recipe_clicked');
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const RecipeDetailScreen()));
+                },
+                child: Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    image: const DecorationImage(
+                      image: NetworkImage('https://images.unsplash.com/photo-1589302168068-964664d93dc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'),
+                      fit: BoxFit.cover
+                    ),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      gradient: const LinearGradient(colors: [Colors.black54, Colors.transparent], begin: Alignment.bottomCenter, end: Alignment.topCenter)
+                    ),
+                    alignment: Alignment.bottomLeft,
+                    child: const Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Recipe of the Day', style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
+                        Text('Hyderabadi Chicken Biryani', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          
               const SizedBox(height: 80),
             ],
           ),
