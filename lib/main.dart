@@ -31,6 +31,44 @@ void main() async {
     navigatorKey: navigatorKey,
   );
 
+  // 3. Handle "Callback" Actions (formerly Custom)
+  NinjaCallbackManager.onEvent.listen((event) {
+    // Listen for Click Events
+    if (event.action == NINJA_COMPONENT_CTA_CLICK) {
+      final data = event.data;
+      final clickType = data['CLICK_TYPE'];
+      
+      // Check if it's a "Callback" action
+      if (clickType == 'custom') {
+        final callbackId = data['eventName']; // 'eventName' field from Dashboard
+        
+        debugPrint("🔥 APP CALLBACK RECEIVED: $callbackId");
+        
+        // Handle specific callbacks
+        if (callbackId == 'add_to_cart_promo') {
+           ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
+             const SnackBar(
+               content: Text('🎉 Promo applied! Added to cart.'),
+               backgroundColor: Colors.green,
+             )
+           );
+        } else if (callbackId == 'open_offers') {
+            // Navigate to Offers tab (Index 3)
+            // Implementation depends on how Home handles tab switching, 
+            // for now just show a snackbar
+            ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
+             const SnackBar(content: Text('🔔 Opening Offers Page...'))
+           );
+        } else {
+           // Default Handler
+           ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
+             SnackBar(content: Text('Callback Triggered: $callbackId'))
+           );
+        }
+      }
+    }
+  });
+
   runApp(const BigBasketApp());
 }
 
